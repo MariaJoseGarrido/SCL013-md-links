@@ -1,4 +1,27 @@
 {
   "name": "md-links",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "description": "## Índice",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariaJoseGarrido/SCL013-md-links.git"
+  },
+  "keywords": [
+    "md-links",
+    "markdown",
+    "nodemodules"
+  ],
+  "author": "Dalia y María José",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MariaJoseGarrido/SCL013-md-links/issues"
+  },
+  "homepage": "https://github.com/MariaJoseGarrido/SCL013-md-links#readme"
 }
