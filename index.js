@@ -34,7 +34,15 @@ if (path.extname(file) === '.md') {
     console.log('Este no es un archivo md, introduce uno')
 }
   
-  
+const RegExr = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n]+)(?=\))/g;
+
+fs.readFile(file, "utf-8", (e,file) => {
+  if (e){
+    console.log(e);
+  }else{
+    console.log("Links:", file.match(RegExr));
+  }
+})  
 
 
 
