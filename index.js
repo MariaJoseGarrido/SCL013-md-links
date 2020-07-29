@@ -5,6 +5,11 @@ let file = process.argv[2]; // Toma el arreglo en la posición 2
 file = path.resolve(file);  // Convierte la ruta de relativa a absoluta
 file = path.normalize(file);  // simplifica la ruta quita excesos de \\
 
+const chalk = require('chalk');
+ 
+console.log(chalk.green('Hello world!'));
+
+
 console.log("file",file);
 
 const getFile = (file) => {
@@ -31,7 +36,7 @@ if (path.extname(file) === '.md') {
       console.error(error)
     })
 } else {
-    console.log('Este no es un archivo md, introduce uno')
+    console.log(chalk.red('¡Esto no es un archivo md, introduce uno!'))
 }
   
 const RegExr = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n]+)(?=\))/g;
@@ -40,7 +45,7 @@ fs.readFile(file, "utf-8", (e,file) => {
   if (e){
     console.log(e);
   }else{
-    console.log("Links:", file.match(RegExr));
+    console.log((chalk.yellow("Links:")), file.match(RegExr));
   }
 })  
 

@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/MariaJoseGarrido/SCL013-md-links#readme",
   "dependencies": {
+    "chalk": "^4.1.0",
     "fetch": "^1.1.0"
   }
 }
