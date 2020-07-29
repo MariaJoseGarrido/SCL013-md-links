@@ -1,7 +1,7 @@
 const fetch = require("fetch"); //realizar peticiones http para obtener recursos de la red
 const fetchUrl = fetch.fetchUrl; //
 
-// //taller alpi
+// //taller alpi!!!
 // let myPromise = promise.resolver("todo bien"); //devuelve el  valor
 
 // console.log(myPromise);
@@ -25,8 +25,6 @@ const fetchUrl = fetch.fetchUrl; //
 // //promise.all(aqui van todas las promesas) recibe de parametro otras promesas
 
 
-
-// const path = require ("path"); //controla todo los archivos y direcciones url. se importa desde node
 
 // var nombre;
 // process.stdout.write("hola mundo\n");//funcion que me deja imprimir mensaje en la terminal, como el console.log
@@ -55,6 +53,6 @@ getHttpStatus(url)
     console.log(err.code);
   });
 
-console.log("mi app sigue");
+console.log("mi app sigue =>");
 
 
