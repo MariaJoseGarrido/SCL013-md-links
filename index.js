@@ -1,16 +1,12 @@
 const path = require ("path"); //controla todo los archivos y direcciones url. se importa desde node
 const fs = require ("fs");//proporciona una api para interactuar con el sistema de archivos
+const chalk = require('chalk');
 let file = process.argv[2]; // Toma el arreglo en la posición 2 
 //contiene los argumentos de la línea de comandos. El primer elemento será node , el segundo elemento será el nombre del archivo JavaScript. Los siguientes elementos serán los argumentos de línea de comando adicionales.
 file = path.resolve(file);  // Convierte la ruta de relativa a absoluta
 file = path.normalize(file);  // simplifica la ruta quita excesos de \\
-
-const chalk = require('chalk');
  
-console.log(chalk.green('Hello world!'));
-
-
-console.log("file",file);
+console.log(chalk.cyan.bold("Estás leyendo el archivo:"),file);
 
 const getFile = (file) => {
   return new Promise((resolve, reject) => {
@@ -48,19 +44,3 @@ fs.readFile(file, "utf-8", (e,file) => {
     console.log((chalk.yellow("Links:")), file.match(RegExr));
   }
 })  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

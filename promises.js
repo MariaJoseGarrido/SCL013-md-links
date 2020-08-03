@@ -1,7 +1,7 @@
 const fetch = require("fetch"); //realizar peticiones http para obtener recursos de la red
 const fetchUrl = fetch.fetchUrl; //
 
-// //taller alpi!!!
+// //taller alpi
 // let myPromise = promise.resolver("todo bien"); //devuelve el  valor
 
 // console.log(myPromise);
