@@ -7,7 +7,7 @@ const path = require('path');
 const absolutePath = path.normalize(path.resolve(file)); // simplifica la ruta quita excesos de \\ arregla la ruta. resolve() la hace absoluta
 
 
-function getMd(absolutePath) { // Función para detectar archivos tipo .md
+ getMd = (absolutePath) => { // Función para detectar archivos tipo .md
   if (path.extname(absolutePath) === '.md') {
     getURL();
   } else {
@@ -15,7 +15,7 @@ function getMd(absolutePath) { // Función para detectar archivos tipo .md
   }
 };
 
-function getURL() { // Función para obtener arreglo de todos los links
+getURL = () => { // Función para obtener arreglo de todos los links
   let printLinks = new Promise((resolve, reject) => {
     readDoc.readDoc(absolutePath)
       .then(datos => {
@@ -42,12 +42,12 @@ function getURL() { // Función para obtener arreglo de todos los links
   return printLinks
 }
 
-function linksFilter(links) { // Función que filtra por estado de links
+linksFilter = (links) => { // Función que filtra por estado de links
   links.map(element => {
     fetch(element.href)
       .then(response => {
         if (response.status === 200) {
-          console.log(chalk.magenta('Texto: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.green('Status: ' + response.status + '' + '[✔]'));
+          console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.green('Status: ' + response.status + '' + '[✔]'));
         } else {
           console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.red('Status: ' + response.status + '' + '[X]'));
         }
@@ -59,7 +59,7 @@ function linksFilter(links) { // Función que filtra por estado de links
   console.log (chalk.cyanBright.bold('------Total Links Checked------> ' + links.length))
 };
 
-function httpWord(links) { // Función que filtra por palabra http de links
+httpWord = (links) => { // Función que filtra por palabra http de links
   let httpWord = [];
   links.map((element) => {
     let prefix = element.href.substring(0, 4);
