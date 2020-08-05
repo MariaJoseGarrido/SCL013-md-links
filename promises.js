@@ -1,4 +1,4 @@
-const mdLinks = require('./index');
+const readDoc = require('./index');
 const marked = require('marked');
 const fetch = require('node-fetch');  //manipula los http
 const chalk = require('chalk');
@@ -17,7 +17,7 @@ function getMd(absolutePath) { // Función para detectar archivos tipo .md
 
 function getURL() { // Función para obtener arreglo de todos los links
   let printLinks = new Promise((resolve, reject) => {
-    mdLinks.readDoc(absolutePath)
+    readDoc.readDoc(absolutePath)
       .then(datos => {
         let renderer = new marked.Renderer();
         let links = [];
