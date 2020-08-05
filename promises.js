@@ -58,13 +58,15 @@ linksFilter = (links) => { // Función que filtra por estado de links
     fetch(element.href)
       .then(response => {
         if (response.status === 200) {
-          console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.green('Status: ' + response.status + '' + '[✔]' + '\n'));
+          console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.green('Status: ' + response.status + '' + '[✔]'));
+          console.log(chalk.white('..................................'));
         } else {
-          console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.red('Status: ' + response.status + '' + '[X]' + '\n'));
+          console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.red('Status: ' + response.status + '' + '[X]'));
+          console.log(chalk.white('..................................'));
         }
       })
       .catch(error => 
-        console.log(chalk.red('Error. This link doesn´t exist --> ' + element.href + '\n')))
+        console.log(chalk.red('Error. This link doesn´t exist --> ' + element.href + '\n')));
         
   });
   console.log (chalk.cyanBright.bold('------Total Links Checked------> ' + links.length + '\n'))
