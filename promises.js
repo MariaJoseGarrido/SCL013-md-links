@@ -1,58 +1,74 @@
-const fetch = require("fetch"); //realizar peticiones http para obtener recursos de la red
-const fetchUrl = fetch.fetchUrl; //
-
-// //taller alpi
-// let myPromise = promise.resolver("todo bien"); //devuelve el  valor
-
-// console.log(myPromise);
-
-// myPromise.then( res => {
-
-// });
-
-// //2da promesa - el "return" de la promesa, igual a resolve
-// let myOtherPromise = new promise((resolve, reject) => {
-//   setTimeout(() => resolve(10), 2000);
-// });
+const mdLinks = require('./index');
+const marked = require('marked');
+const fetch = require('node-fetch');  //manipula los http
+const chalk = require('chalk');
+const file = process.argv[2];
+const path = require('path');
+const absolutePath = path.normalize(path.resolve(file)); // simplifica la ruta quita excesos de \\ arregla la ruta. resolve() la hace absoluta
 
 
+function getMd(absolutePath) { // Función para detectar archivos tipo .md
+  if (path.extname(absolutePath) === '.md') {
+    getURL();
+  } else {
+    console.log(chalk.red.bold('Error. Esto no es un .md - Ingresa uno!'));
+  }
+};
 
-// myOtherPromise.then(res => {
-//   res = res*500;
-//   console.log(res);
-// })
-
-// //promise.all(aqui van todas las promesas) recibe de parametro otras promesas
-
-
-
-// var nombre;
-// process.stdout.write("hola mundo\n");//funcion que me deja imprimir mensaje en la terminal, como el console.log
-// process.exit(); //para terminar la app
-
-
-//fetch a un sitio web y retornar es estado http
-const getHttpStatus = (url) => {
-  return new Promise((resolve, reject) =>{
-    fetchUrl (url, (error, meta) => {
-      if(error) {
-        reject(error);
-      } else{
-        resolve(meta.status);
-      }
-    });
-  });
+function getURL() { // Función para obtener arreglo de todos los links
+  let printLinks = new Promise((resolve, reject) => {
+    mdLinks.readDoc(absolutePath)
+      .then(datos => {
+        let renderer = new marked.Renderer();
+        let links = [];
+        renderer.link = function (href, title, text) {
+          links.push({
+            href: href,
+            text: text,
+            file: absolutePath,
+          });
+        };
+        marked(datos, {
+          renderer: renderer
+        });
+        links = httpWord(links); // Filtrar por prefijo http
+        links = linksFilter(links)
+        return resolve(links)
+      })
+      .catch(err => {
+        (console.log(err));
+      })
+  })
+  return printLinks
 }
 
-let url = "https://www.google.com";
-getHttpStatus(url)
-  .then(res =>{
-    console.log("El estado de", url, "es:", res)
-  })
-  .catch(err => {
-    console.log(err.code);
+function linksFilter(links) { // Función que filtra por estado de links
+  links.map(element => {
+    fetch(element.href)
+      .then(response => {
+        if (response.status === 200) {
+          console.log(chalk.magenta('Texto: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.green('Status: ' + response.status + '' + '[✔]'));
+        } else {
+          console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.red('Status: ' + response.status + '' + '[X]'));
+        }
+      })
+      .catch(error => 
+        console.log(chalk.red('Error. This link doesn´t exist --> ' + element.href)))
+        
   });
+  console.log (chalk.cyanBright.bold('------Total Links Checked------> ' + links.length))
+};
 
-console.log("mi app sigue =>");
+function httpWord(links) { // Función que filtra por palabra http de links
+  let httpWord = [];
+  links.map((element) => {
+    let prefix = element.href.substring(0, 4);
+    if (prefix == 'http') {
+      httpWord.push(element);
+    }
+  })
+  return httpWord;
+};
+getMd(absolutePath);
 
 
