@@ -11,7 +11,7 @@ function getMd(absolutePath) { // Función para detectar archivos tipo .md
   if (path.extname(absolutePath) === '.md') {
     getURL();
   } else {
-    console.log(chalk.red.bold('Error. Esto no es un .md - Ingresa uno!'));
+    console.log(chalk.red.bold('Error. This is not an .md'));
   }
 };
 
