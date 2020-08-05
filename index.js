@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // const path = require ("path"); //controla todo los archivos y direcciones url. se importa desde node
 // const fs = require ("fs");//proporciona una api para interactuar con el sistema de archivos
 // const chalk = require('chalk');
@@ -102,6 +103,9 @@
 // }
 
 const fs = require('fs'); //proporciona una api para interactuar con el sistema de archivos
+=======
+const fs = require('fs');
+>>>>>>> 01d383d6c56cddd61b81691061dbc6770cd02a12
 
 module.exports = () => {
 
