@@ -101,7 +101,7 @@
 // 	})
 // }
 
-const fs = require('fs');
+const fs = require('fs'); //proporciona una api para interactuar con el sistema de archivos
 
 module.exports = () => {
 

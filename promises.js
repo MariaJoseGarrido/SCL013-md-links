@@ -6,6 +6,7 @@ const file = process.argv[2];
 const path = require('path');
 const absolutePath = path.normalize(path.resolve(file)); // simplifica la ruta quita excesos de \\ arregla la ruta. resolve() la hace absoluta
 
+console.log(chalk.bgYellow.black.bold("▮▮▮▮▮▮▮▮▮▶ U ARE USING MD-LINKS LIBRARY ◀▮▮▮▮▮▮▮▮▮", + '\n' ));
 
 function getMd(absolutePath) { // Función para detectar archivos tipo .md
   if (path.extname(absolutePath) === '.md') {
@@ -31,7 +32,7 @@ function getURL() { // Función para obtener arreglo de todos los links
         marked(datos, {
           renderer: renderer
         });
-        links = httpWord(links); // Filtrar por prefijo http
+        links = httpWord(links); // Filtrar por http en link
         links = linksFilter(links)
         return resolve(links)
       })
@@ -47,9 +48,9 @@ function linksFilter(links) { // Función que filtra por estado de links
     fetch(element.href)
       .then(response => {
         if (response.status === 200) {
-          console.log(chalk.magenta('Texto: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.green('Status: ' + response.status + '' + '[✔]'));
+          console.log(chalk.magenta('Texto: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.green('Status: ' + response.status + '' + '[✔]' + '\n'));
         } else {
-          console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.red('Status: ' + response.status + '' + '[X]'));
+          console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.red('Status: ' + response.status + '' + '[X]' + '\n'));
         }
       })
       .catch(error => 
