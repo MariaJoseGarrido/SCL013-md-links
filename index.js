@@ -4,7 +4,7 @@ module.exports = () => {
 
 };
 
-const readDoc = (path) => { // Función para leer archivo
+const readDoc = (path) => { // Función para leer archivo según su ruta
   let content = new Promise((resolve, reject) => {
     fs.readFile(path, 'utf8', (err, data) => {
       if (err) {

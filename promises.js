@@ -42,9 +42,15 @@ getURL = () => { // Función para obtener arreglo de todos los links
         marked(datos, {
           renderer: renderer
         });
-        links = httpWord(links); // Filtrar por http en link
-        links = linksFilter(links)
-        return resolve(links)
+        urlLinks = links.filter(element => element.href.includes('http'));
+        let argv3 = process.argv[3];
+        if (argv3 == "-v" || argv3 == "-validate" || argv3 == "--v"){
+          linksFilter(urlLinks, false, 200);
+          } else if (argv3 == '-s' || argv3  == '-stats'  || argv3 == "--s"){
+            console.log("coming soon...")
+            let add = conteoLinks(urlLinks)
+            console.log(add)
+          }
       })
       .catch(err => {
         (console.log(err));
@@ -53,24 +59,26 @@ getURL = () => { // Función para obtener arreglo de todos los links
   return printLinks
 }
 
-linksFilter = (links) => { // Función que filtra por estado de links
+const linksFilter = (links, unique, num) => { 
   links.map(element => {
     fetch(element.href)
       .then(response => {
-        if (response.status === 200) {
+        if (response.status === num) {
           console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.green('Status: ' + response.status + '' + '[✔]'));
           console.log(chalk.white('..................................'));
-        } else {
+        } else  {
           console.log(chalk.magenta('Text: ' + element.text + '\n'), chalk.yellow('Href: ' + element.href + '\n'), ('File: '+ element.file + '\n'), chalk.red('Status: ' + response.status + '' + '[X]'));
-          console.log(chalk.white('..................................'));
+          console.log(chalk.white('..................................'));        }
+      })
+      .catch(error => {
+        if(unique == false)  {
+          console.log(chalk.red('Error. This link doesn´t exist --> ' + element.href + '\n'));
         }
       })
-      .catch(error => 
-        console.log(chalk.red('Error. This link doesn´t exist --> ' + element.href + '\n')));
-        
-  });
-  console.log (chalk.cyanBright.bold('------Total Links Checked------> ' + links.length + '\n'))
-};
+    });
+    console.log (chalk.cyanBright.bold('------Total Links Checked------> ' + links.length + '\n'))
+  };
+
 
 httpWord = (links) => { // Función que filtra por palabra http de links
   let httpWord = [];
@@ -82,6 +90,31 @@ httpWord = (links) => { // Función que filtra por palabra http de links
   })
   return httpWord;
 };
+
 getMd(absolutePath);
+
+//Función que calcula total de links rotos//no funciona
+totalBrokenLinks = (links) => {
+  const linksUrl = links.map((link) => link.href);
+  let brokenLinks;
+  let counterBroken = 0;
+  linksUrl.forEach(element => {
+    brokenLinks = fetch(element)
+      .then(resp => {
+        if (resp.status !== 200) {
+          counterBroken++
+        }
+        return counterBroken;
+      })
+      .catch(error => {
+        console.log("catch " + error)
+      });
+  })
+  brokenLinks.then((res) => {
+    console.log(colors.black("Broken: "), colors.red(res))
+  });
+}
+
+
 
 
