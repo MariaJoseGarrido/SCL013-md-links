@@ -38,6 +38,7 @@ Tus consola se verá así:
 **Mostrará el status 200 y 404.**
 
 **200**: La solicitud ha tenido éxito.
+
 **404**: NOT FOUND. El servidor no pudo encontrar el contenido solicitado.
 
 ## 7. Autoras
