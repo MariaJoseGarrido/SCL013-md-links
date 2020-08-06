@@ -1,6 +1,6 @@
 # Markdown Links :computer:
 
-![Logo](https://commons.wikimedia.org/wiki/File:Markdown-mark.svg)
+![MD](markdown_106519.png)
 
 ### 1. Preámbulo
 
