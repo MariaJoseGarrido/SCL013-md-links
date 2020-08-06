@@ -1,4 +1,6 @@
-# Markdown Links
+# Markdown Links :computer:
+
+![Logo](md-links-img.png)
 
 ### 1. Preámbulo
 
@@ -17,17 +19,15 @@ La lógica de este programa la podemos observar en el diagrama a continuación:
 
 ## 6. Modo de Uso
 
-Para hacer uso de la librería ejecuta el siguiente comando en la terminal de tu archivo.
+Para hacer uso de la librería ejecuta el siguiente comando en la terminal de tu archivo, entregando la ruta de tu archivo.
 
-$ node md-links 
+*$ node \path\ md-links*
 
 Para ver el total de links y total de links únicos ejecuta el siguiente comando en la terminal.
 
-$ --validate
+*$ node \path\ -validate o -v*
 
-Para ver el estado de tus links ejecuta el siguiente comando en la terminal.
-
-$ --stats
+![console](funcionando.png)
 
 ## 7. Autoras
 

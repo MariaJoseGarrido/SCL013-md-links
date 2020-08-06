@@ -17,7 +17,6 @@ if( typeof console === 'object' ) {
   );
 }
 
-
  getMd = (absolutePath) => { // Función para detectar archivos tipo .md
   if (path.extname(absolutePath) === '.md') {
     getURL();
