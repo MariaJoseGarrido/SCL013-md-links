@@ -1,8 +1,12 @@
 # Markdown Links :computer:
 
-![Logo](md-linksimg.png)
+![Logo](https://commons.wikimedia.org/wiki/File:Markdown-mark.svg)
 
 ### 1. Preámbulo
+
+![MD](md-linksimg.png)
+
+Markdown es un lenguaje de marcado que facilita la aplicación de formato a un texto empleando una serie de caracteres de una forma especial. En principio, fue pensado para elaborar textos cuyo destino iba a ser la web con más rapidez y sencillez que si estuviésemos empleando directamente HTML. Y si bien ese suele ser el mejor uso que podemos darle, también podemos emplearlo para cualquier tipo de texto, independientemente de cual vaya a ser su destino.
 
 Los archivos Markdown normalmente contienen links (vínculos/ligas) que muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de la información que se quiere compartir.
 
@@ -21,9 +25,13 @@ Para instalar la librería ingresa el siguiente comando en tu consola:
 
 `npm i md-link-garrido-garcia`
 
+Después agrega la siguiente línea en el archivo que contendrá las funciones de lectura de los documentos:
+
+`const mdLinkGarridoGarcia = require("md-link-garrido-garcia")`
+
 ## 6. Modo de Uso
 
-Para hacer uso de la librería ejecuta el siguiente comando en la terminal de tu archivo, entregando la ruta de tu archivo.
+Para hacer uso de la librería primero debes ejecutar el siguiente comando en la terminal de tu archivo, entregando la ruta de tu archivo.
 
 `$ node \path\ md-links`
 
