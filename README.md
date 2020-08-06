@@ -1,6 +1,6 @@
 # Markdown Links :computer:
 
-![Logo](md-links-img.png)
+![Logo](md-linksimg.png)
 
 ### 1. Preámbulo
 
@@ -21,13 +21,19 @@ La lógica de este programa la podemos observar en el diagrama a continuación:
 
 Para hacer uso de la librería ejecuta el siguiente comando en la terminal de tu archivo, entregando la ruta de tu archivo.
 
-*$ node \path\ md-links*
+`*$ node \path\ md-links*`
 
 Para ver el total de links y total de links únicos ejecuta el siguiente comando en la terminal.
 
-*$ node \path\ -validate o -v*
+`*$ node \path\ -validate o -v*`
+
+Tus consola se verá así:
 
 ![console](funcionando.png)
+
+**Mostrará el status 200 y 404.**
+**200**: La solicitud ha tenido éxito.
+**404**: NOT FOUND. El servidor no pudo encontrar el contenido solicitado
 
 ## 7. Autoras
 
