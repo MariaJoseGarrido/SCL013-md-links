@@ -39,7 +39,7 @@ getURL = () => { // Función para obtener arreglo de todos los links
           });
         };
         marked(datos, {
-          renderer: renderer
+          renderer: renderer //Un objeto que contiene funciones para representar tokens en HTML.
         });
         urlLinks = links.filter(element => element.href.includes('http'));
         let argv3 = process.argv[3];
@@ -77,43 +77,5 @@ const linksFilter = (links, unique, num) => {
     });
     console.log (chalk.cyanBright.bold('------Total Links Checked------> ' + links.length + '\n'))
   };
-
-
-httpWord = (links) => { // Función que filtra por palabra http de links
-  let httpWord = [];
-  links.map((element) => {
-    let prefix = element.href.substring(0, 4);
-    if (prefix == 'http') {
-      httpWord.push(element);
-    }
-  })
-  return httpWord;
-};
-
-getMd(absolutePath);
-
-//Función que calcula total de links rotos//no funciona
-totalBrokenLinks = (links) => {
-  const linksUrl = links.map((link) => link.href);
-  let brokenLinks;
-  let counterBroken = 0;
-  linksUrl.forEach(element => {
-    brokenLinks = fetch(element)
-      .then(resp => {
-        if (resp.status !== 200) {
-          counterBroken++
-        }
-        return counterBroken;
-      })
-      .catch(error => {
-        console.log("catch " + error)
-      });
-  })
-  brokenLinks.then((res) => {
-    console.log(colors.black("Broken: "), colors.red(res))
-  });
-}
-
-
-
+  getMd(absolutePath);
 
