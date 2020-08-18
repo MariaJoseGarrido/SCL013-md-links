@@ -1,8 +1,8 @@
 const readDoc = require('./index');
-const marked = require('marked');
-const fetch = require('node-fetch');  //manipula los http
+const marked = require('marked'); //ayuda a mejorar la velocidad del proceso, no guarda caché
+const fetch = require('node-fetch');  //manipula los http a traves de peticiones y respuestas. (200 o 400), se comunica con otro
 const chalk = require('chalk');
-const file = process.argv[2]; 
+const file = process.argv[2]; //posicion de donde queremos extraer links
 const path = require('path');
 const absolutePath = path.normalize(path.resolve(file)); // simplifica la ruta quita excesos de \\ arregla la ruta. resolve() la hace absoluta
 
@@ -17,9 +17,9 @@ if( typeof console === 'object' ) {
   );
 }
 
- getMd = (absolutePath) => { // Función para detectar archivos tipo .md
+ getMd = ( absolutePath ) => { // Función para detectar archivos tipo .md
   if (path.extname(absolutePath) === '.md') {
-    getURL();
+    getURL(); //pasa a la funcion siguiente
   } else {
     console.log(chalk.red.bold('Error. This is not an .md file'));
   }
@@ -28,9 +28,9 @@ if( typeof console === 'object' ) {
 getURL = () => { // Función para obtener arreglo de todos los links
   let printLinks = new Promise((resolve, reject) => {
     readDoc.readDoc(absolutePath)
-      .then(datos => {
-        let renderer = new marked.Renderer();
-        let links = [];
+      .then(data => {
+        let renderer = new marked.Renderer(); //trae informacion sin data privados "tokenizados" y si cahce
+        let links = []; //lleno con los links del doc
         renderer.link = function (href, title, text) {
           links.push({
             href: href,
@@ -38,13 +38,13 @@ getURL = () => { // Función para obtener arreglo de todos los links
             file: absolutePath,
           });
         };
-        marked(datos, {
-          renderer: renderer //Un objeto que contiene funciones para representar tokens en HTML.
+        marked(data, {
+          renderer: renderer //Un objeto tipo texto que contiene funciones para representar tokens en HTML.
         });
-        urlLinks = links.filter(element => element.href.includes('http'));
-        let argv3 = process.argv[3];
+        urlLinks = links.filter(element => element.href.includes('http')); //filtro links que cumplen con las condiciones
+        let argv3 = process.argv[3]; // aqui agregamos los flags
         if (argv3 == "-v" || argv3 == "-validate" || argv3 == "--v"){
-          linksFilter(urlLinks, false, 200);
+          linksFilter(urlLinks, false, 200); //muestra todos los links con la funcion linksFilter
           } else if (argv3 == '-s' || argv3  == '-stats'  || argv3 == "--s"){
             console.log("coming soon...")
             let add = conteoLinks(urlLinks)
@@ -58,7 +58,7 @@ getURL = () => { // Función para obtener arreglo de todos los links
   return printLinks
 }
 
-const linksFilter = (links, unique, num) => { 
+const linksFilter = (links, unique, num) => { //mostrar de forma especifica el estado de los links
   links.map(element => {
     fetch(element.href)
       .then(response => {
